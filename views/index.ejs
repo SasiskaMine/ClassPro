@@ -4,8 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>ClassPro</h1>
+    <form id="login" action="/login" method="post">
+        <h3>Вход</h3>
+        <input type="text" id="userLogin" name="userLogin" placeholder="Логин">
+        <input type="text" id="userPass" name="userPass" placeholder="Пароль">
+        <button type="submit">Войти</button>
+    </form>
+    <form id="reg" action="/register" method="post">
+        <h3>Регистрация</h3>
+        <input type="text" id="userLogin" name="userLogin" placeholder="Логин">
+        <input type="text" id="userPass" name="userPass" placeholder="Пароль">
+        <button type="submit">зарегистрироваться</button>
+    </form>
+    <p>Нету аккаунта? <a id="reg_show" href=""> Зарегестрируйтесь!</a></p>
 </body>
+<script>
+    const Register_Show = document.querySelector('#reg_show');
+    const LoginForm = document.querySelector('#login');
+    const RegForm = document.querySelector('#reg');
+
+    var Form = 1;
+
+    LoginForm.style.display = 'flex';
+    
+    Register_Show.onclick = (e) => {
+        e.preventDefault(); 
+
+        if (Form == 1) {
+            Form = 2;
+            LoginForm.style.display = 'none';
+            RegForm.style.display = 'flex';
+        } else {
+            Form = 1;
+            RegForm.style.display = 'none';
+            LoginForm.style.display = 'flex';
+        }
+    };
+</script>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 98dvh;
+
+        background: linear-gradient(to bottom right, black , orange);
+        color: white;
+    }
+</style>
+
 </html>
