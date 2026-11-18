@@ -1,53 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ClassPro</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <header>
         <h2>ClassPro</h2>
-        <h2><%=Class%></h2>
-        <!-- <h3>Created By KirillAnurov</h3> -->
+        <h2><%= Class %> (<%= today %>)</h2>
     </header>
+
     <div class="select-tabs">
-        <a href="">Главная</a>
+        <a id="tab1s" href="">Главная</a>
         <hr id="vertical-hr">
-        <a href="">Быстрое изменение</a>
+        <a id="tab2s" href="">Быстрое изменение</a>
         <hr id="vertical-hr">
-        <a href="">Настройка</a>
+        <a id="tab3s" href="">Настройка</a>
     </div>
+
     <div class="tabs">
         <div id="tab1" style="display: block;">
             <h1>Добрый день, <%= Name %>!</h1>
             <table>
-  <thead>
-    <tr>
-      <th>Номер*</th>
-      <th>ФИО*</th>
-      <th>Комментарии</th>
-      <th>Был*</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Ф И О</td>
-      <td><input type="text" placeholder="Заметка..." disabled></td>
-      <td><input type="checkbox" checked disabled></td>
-    </tr>
-  </tbody>
-</table>
+                <thead>
+                    <tr>
+                        <th>Номер*</th>
+                        <th>ФИО*</th>
+                        <th>Комментарии</th>
+                        <th>Был*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach((student, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= student.full_name %></td>
+                            <td><input type="text" value="<%= student.comment || '' %>" disabled></td>
+                            <td><input type="checkbox" <%= student.is_present ? 'checked' : '' %> disabled></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         </div>
+
         <div id="tab2" style="display: none;">
-
+            <h1>Отметка за <%= today %></h1>
+            <form id="fast_edit" action="/dashboard/save-journal" method="post">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Номер*</th>
+                            <th>ФИО*</th>
+                            <th>Комментарии</th>
+                            <th>Был*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% students.forEach((student, index) => { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                    <input type="hidden" name="studentIds" value="<%= student.id %>">
+                                </td>
+                                <td><%= student.full_name %></td>
+                                <td>
+                                    <input type="text" name="comments" value="<%= student.comment || '' %>" placeholder="Заметка...">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="present" value="<%= student.id %>" <%= student.is_present ? 'checked' : '' %>>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <br>
+                <button type="submit">Сохранить журнал</button>
+            </form>
         </div>
-        <div id="tab3" style="display: none;">
 
+        <div id="tab3" style="display: none;">
+            <h1>Настройки:</h1>
+            <form action="/dashboard/settings" method="post">
+                <input type="text" name="SettingsClassNum" placeholder="Номер и буква класса" value="<%= Class %>">
+                <button type="submit">Применить</button>
+            </form>
+
+            <h2>Добавить ученика в <%= Class %> класс:</h2>
+            <form action="/dashboard/add-student" method="post">
+                <input type="text" name="fullName" placeholder="Иванов Иван Иванович" required>
+                <button type="submit">Добавить</button>
+            </form>
+            <h2>Удалить ученика из <%= Class %> класса:</h2>
+            <form action="/dashboard/del-student" method="post">
+                <input type="text" name="id" placeholder="Номер" required>
+                <button type="submit">удалить</button>
+            </form>
+            <div>
+                <table>
+                <thead>
+                    <tr>
+                        <th>Номер*</th>
+                        <th>ФИО*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach((student, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= student.full_name %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            </div>
         </div>
     </div>
-    
 </body>
+<script>
+    const tab1s = document.querySelector('#tab1s');
+    const tab2s = document.querySelector('#tab2s');
+    const tab3s = document.querySelector('#tab3s');
+    const tab1 = document.querySelector('#tab1');
+    const tab2 = document.querySelector('#tab2');
+    const tab3 = document.querySelector('#tab3');
+
+    tab1s.onclick = (e) => {
+        e.preventDefault();
+        tab1.style.display = 'block';
+        tab2.style.display = 'none';
+        tab3.style.display = 'none';
+    };
+    tab2s.onclick = (e) => {
+        e.preventDefault();
+        tab1.style.display = 'none';
+        tab2.style.display = 'block';
+        tab3.style.display = 'none';
+    };
+    tab3s.onclick = (e) => {
+        e.preventDefault();
+        tab1.style.display = 'none';
+        tab2.style.display = 'none';
+        tab3.style.display = 'block';
+    };
+</script>
 </html>
