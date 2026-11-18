@@ -7,6 +7,47 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Привет</h1>
+    <header>
+        <h2>ClassPro</h2>
+        <h2><%=Class%></h2>
+        <!-- <h3>Created By KirillAnurov</h3> -->
+    </header>
+    <div class="select-tabs">
+        <a href="">Главная</a>
+        <hr id="vertical-hr">
+        <a href="">Быстрое изменение</a>
+        <hr id="vertical-hr">
+        <a href="">Настройка</a>
+    </div>
+    <div class="tabs">
+        <div id="tab1" style="display: block;">
+            <h1>Добрый день, <%= Name %>!</h1>
+            <table>
+  <thead>
+    <tr>
+      <th>Номер*</th>
+      <th>ФИО*</th>
+      <th>Комментарии</th>
+      <th>Был*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Ф И О</td>
+      <td><input type="text" placeholder="Заметка..." disabled></td>
+      <td><input type="checkbox" checked disabled></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <div id="tab2" style="display: none;">
+
+        </div>
+        <div id="tab3" style="display: none;">
+
+        </div>
+    </div>
+    
 </body>
 </html>
