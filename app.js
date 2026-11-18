@@ -1,14 +1,27 @@
 var express = require('express');
+var session = require('express-session');
 var app = express();
-var db = require('./db');
+var db = require('./modules/db_users');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static('public'));
+app.use(session({
+  secret: '^,p_T}P7bx[%onn', // ЗАМЕНИТЕ НА СВОЙ КОД
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('auth');
+});
+
+app.get('/dashboard', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/');
+  }
+  
+  res.render('dashboard');
 });
 
 app.post('/register', (req, res) => {
@@ -35,8 +48,8 @@ app.post('/login', (req, res) => {
   const user = query.get(userLogin, userPass);
 
   if (user) {
-    console.log("Вошли");
-    res.send(`Добро пожаловать, ${user.login}!`);
+    req.session.user  = user;
+    res.redirect('/dashboard')
   } else {
     console.log("Неверно");
     res.send('Неверный логин или пароль! <a href="/">Попробовать снова</a>');
