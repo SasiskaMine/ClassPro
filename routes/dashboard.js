@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const checkAuth = require('../middlewares/auth');
+const role_check = require('../middlewares/role_check');
 const { readJson, writeJson } = require('../modules/settings/settings');
 const db = require('../modules/db/class_db');
 
@@ -8,10 +9,11 @@ function getTodayDate() {
     return new Date().toISOString().split('T')[0];
 }
 
-router.get('/', checkAuth, async (req, res) => {
+router.get('/', checkAuth, role_check, async (req, res) => {
     const CurrentClass = await readJson();
     const userName = req.session.user.name;
     const today = getTodayDate();
+
 
     const students = db.prepare(`
         SELECT 
@@ -25,12 +27,14 @@ router.get('/', checkAuth, async (req, res) => {
         WHERE students.class_name = ?
     `).all(today, CurrentClass);
 
-    res.render('dashboard', { 
-        Name: userName, 
-        Class: CurrentClass, 
+    res.render('dashboard', {
+        Name: userName,
+        Class: CurrentClass,
         students: students,
-        today: today
+        today: today,
+        userRole: req.userRole
     });
+
 });
 
 router.post('/settings', checkAuth, async (req, res) => {

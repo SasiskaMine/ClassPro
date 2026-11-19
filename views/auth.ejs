@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/styles.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+  </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
 </head>
+
 <body>
     <h1>ClassPro</h1>
     <form id="login" action="/login" method="post">
         <h3>Вход</h3>
-        <input type="text" id="userLogin" name="userLogin" placeholder="Логин">
-        <input type="password" id="userPass" name="userPass" placeholder="Пароль">
-        <button type="submit">Войти</button>
+        <md-filled-text-field type="text" id="userLogin" name="userLogin" placeholder="Логин"></md-filled-text-field>
+        <md-filled-text-field type="password" id="userPass" name="userPass" placeholder="Пароль"></md-filled-text-field>
+        <md-filled-button type="submit">Войти</md-filled-button>
     </form>
     <form id="reg" action="/register" method="post">
         <h3>Регистрация</h3>
-        <input type="text" name="userName" id="userName" placeholder="Имя">
-        <input type="text" id="userLogin" name="userLogin" placeholder="Логин">
-        <input type="password" id="userPass" name="userPass" placeholder="Пароль">
-        <button type="submit">зарегистрироваться</button>
+        <md-filled-text-field type="text" name="userName" id="userName" placeholder="Имя"></md-filled-text-field>
+        <md-filled-text-field type="text" name="userLogin" id="userLogin" placeholder="Логин"></md-filled-text-field>
+        <md-filled-text-field type="password" name="userPass" id="userPass" placeholder="Пароль"></md-filled-text-field>
+        <md-filled-button type="submit">Зарегистрироваться</md-filled-button>
     </form>
-    <p>Нету аккаунта? <a id="reg_show" href=""> Зарегестрируйтесь!</a></p>
+    <p id="reg-show">Нету аккаунта? <a id="reg_show" href=""> Зарегестрируйтесь!</a></p>
 </body>
 <script>
-    const Register_Show = document.querySelector('#reg_show');
     const LoginForm = document.querySelector('#login');
     const RegForm = document.querySelector('#reg');
+    const regShow = document.querySelector('#reg-show');
 
-    var Form = 1;
+    let isLogin = true;
 
     LoginForm.style.display = 'flex';
-    
-    Register_Show.onclick = (e) => {
-        e.preventDefault(); 
+    RegForm.style.display = 'none';
 
-        if (Form == 1) {
-            Form = 2;
-            LoginForm.style.display = 'none';
-            RegForm.style.display = 'flex';
-        } else {
-            Form = 1;
-            RegForm.style.display = 'none';
-            LoginForm.style.display = 'flex';
+    regShow.addEventListener('click', (e) => {
+       
+        if (e.target.tagName === 'A') {
+            e.preventDefault();
+
+            if (isLogin) {
+                LoginForm.style.display = 'none';
+                RegForm.style.display = 'flex';
+                regShow.innerHTML = 'Уже есть аккаунт? <a id="reg_show" href="#">Войти!</a>';
+            } else {
+                RegForm.style.display = 'none';
+                LoginForm.style.display = 'flex';
+                regShow.innerHTML = 'Всё же нет аккаунта? <a id="reg_show" href="#">Зарегистрируйтесь!</a>';
+            }
+
+            isLogin = !isLogin;
         }
-    };
+    });
 </script>
 <style>
     body {
@@ -54,7 +75,7 @@
         align-items: center;
         height: 98dvh;
 
-        background: linear-gradient(to bottom right, black , orange);
+        background: linear-gradient(to bottom right, black, orange);
         color: white;
     }
 </style>
