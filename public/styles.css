@@ -3,16 +3,27 @@
   --md-sys-color-on-primary: #FFFFFF;
   --md-sys-color-primary-container: #5c1491;
   --md-sys-color-on-primary-container: #f0e1ff;
-  --md-sys-color-on-surface-variant: #d4aff5; /* Цвет неактивных элементов по умолчанию */
-  
+  --md-sys-color-on-surface: #ffffff;
+  --md-sys-color-on-surface-variant: #d4aff5;
+
+  /* Настройки Material Web Text Field */
   --md-filled-text-field-container-color: #21162b;
-  
+  --md-filled-text-field-input-text-color: #ffffff;
+  --md-filled-text-field-focus-input-text-color: #ffffff;
+  --md-filled-text-field-hover-input-text-color: #ffffff;
+  --md-filled-text-field-label-text-color: #d4aff5;
+  --md-filled-text-field-focus-label-text-color: #e6ccff;
+  --md-filled-text-field-hover-label-text-color: #ffffff;
+  --md-filled-text-field-caret-color: #ffffff;
+  --md-filled-text-field-active-indicator-color: #8c42c7;
+  --md-filled-text-field-focus-active-indicator-color: #c084fc;
+
   /* Настройки Material Web Tabs */
   --md-primary-tab-container-color: #160e1d;
-  --md-primary-tab-label-text-color: #d4aff5; /* Цвет текста невыделенной вкладки */
-  --md-primary-tab-hover-label-text-color: #ffffff; /* При наведении */
-  --md-primary-tab-active-label-text-color: #ffffff; /* Выделенная вкладка */
-  --md-primary-tab-active-indicator-color: #a855f7; /* Полоска снизу у активной вкладки */
+  --md-primary-tab-label-text-color: #d4aff5;
+  --md-primary-tab-hover-label-text-color: #ffffff;
+  --md-primary-tab-active-label-text-color: #ffffff;
+  --md-primary-tab-active-indicator-color: #a855f7;
 }
 
 * {
