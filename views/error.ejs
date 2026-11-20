@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-box">
+        <div class="main">
+            <h1>Ошибка <%= NumError %></h1>
+            <p id="info"><%= TextError%></p>
+        </div>
+        <img height="459px"
+            src="https://images01.nicepage.io/c461c07a441a5d220e8feb1a/c9d1903b449d53c5ad034708/a37107e3-f4c3-65c9-98a9-69b0f78a61c7.jpg"
+            alt="">
+    </div>
+    <footer>
+        <div class="footer-line">
+            KiwiProject 2026 |
+            <text-line>
+                <span id="yarndings-chart">KIRILL ANUROV</span>
+                <span>Кирилл Ануров</span>
+            </text-line>
+            | <a href="https://github.com/SasiskaMine/ClassPro">ClassPro</a>
+        </div>
+    </footer>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yarndings+20+Charted&display=swap');
+
+    a {
+        text-decoration: wavy;
+        color: #0f8ea7;
+    }
+
+    .footer-line {
+        padding: 16px 0;
+        font-size: 16px;
+        line-height: 34px;
+    }
+
+    text-line {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        vertical-align: middle;
+    }
+
+    text-line span {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    #yarndings-chart {
+        font-family: "Yarndings 20 Charted", system-ui;
+    }
+
+
+    footer {
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        width: 100%;
+    }
+
+    .main-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 50px;
+        height: 100%;
+    }
+
+    body {
+        background-color: #3f0866;
+        color: white;
+        font-family: "Oswald", sans-serif;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    h3 {
+        font-family: "Nubito", sans-serif;
+    }
+
+    #info {
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        width: 350px;
+    }
+
+    .main {
+        margin: 5px;
+
+    }
+</style>
+
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiwiProject - В Разработке</title>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container nav-wrapper">
+            <a href="#hero" class="brand-logo">
+                <span class="logo-symbol">
+                    <img src="" alt="">
+                </span>
+                <span class="logo-text">Kiwi<span class="logo-accent">Project</span></span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="mailto:kirillanurov2023@gmail.com" class="nav-link">Контакты</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="https://ai.kiwiproject.ru" target="_blank" rel="noopener noreferrer" class="service-pill-btn">
+                    <span class="pulse-dot"></span>
+                    <span>ai.kiwiproject.ru</span>
+                </a>
+                <a href="mailto:kirillanurov2023@gmail.com" class="btn btn-primary btn-sm">Написать нам</a>
+                <button class="mobile-toggle" id="menuToggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="main-box">
+        <div class="main">
+            <span>
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#d46cca"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+            </span>
+            <h1>В разработке</h2>
+                <p id="info">Сервис совсем скоро будет доступен! Мы готовим для вас удивительное и захватывающее.</p>
+                <div>
+                    <h3>Осталось ожидать:</h4>
+                        <p id="timer">
+                            <%= WaitDate %>
+                        </p>
+                </div>
+        </div>
+        <img height="459px"
+            src="https://images01.nicepage.io/c461c07a441a5d220e8feb1a/c9d1903b449d53c5ad034708/a37107e3-f4c3-65c9-98a9-69b0f78a61c7.jpg"
+            alt="">
+    </div>
+    <footer>
+        <div class="footer-line">
+            KiwiProject 2026 |
+            <text-line>
+                <span id="yarndings-chart">KIRILL ANUROV</span>
+                <span>Кирилл Ануров</span>
+            </text-line>
+            | <a href="https://github.com/SasiskaMine/ClassPro">ClassPro</a>
+        </div>
+    </footer>
+
+
+
+    <script>
+        const target = new Date('<%= targetDate %>');
+        const el = document.getElementById('timer');
+
+        const tick = () => {
+            const diff = target - Date.now();
+            if (diff <= 0) return (el.textContent = 'Время вышло!');
+
+            const d = Math.floor(diff / 86400000);
+            const h = String(Math.floor(diff / 3600000) % 24).padStart(2, '0');
+            const m = String(Math.floor(diff / 60000) % 60).padStart(2, '0');
+            const s = String(Math.floor(diff / 1000) % 60).padStart(2, '0');
+
+            el.textContent = `${d}д ${h}:${m}:${s}`;
+            setTimeout(tick, 1000 - (Date.now() % 1000));
+        };
+
+        setTimeout(tick, 1000 - (Date.now() % 1000));
+    </script>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yarndings+20+Charted&display=swap');
+
+    a {
+        text-decoration:wavy;
+        color:#0f8ea7;
+    }
+
+    .footer-line {
+        padding: 16px 0;
+        font-size: 16px;
+        line-height: 34px;
+    }
+
+    text-line {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        vertical-align: middle;
+    }
+
+    text-line span {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    #yarndings-chart {
+        font-family: "Yarndings 20 Charted", system-ui;
+    }
+
+
+    footer {
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        width: 100%;
+    }
+
+    .main-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 50px;
+        height: 100%;
+    }
+
+    body {
+        background-color: #3f0866;
+        color: white;
+        font-family: "Oswald", sans-serif;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    h3 {
+        font-family: "Nubito", sans-serif;
+    }
+
+    #info {
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        width: 350px;
+    }
+
+    .main {
+        margin: 5px;
+
+    }
+
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        position: relative;
+        z-index: 1;
+    }
+
+
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background-color: rgba(9, 14, 12, 0.52);
+        border-bottom: 1px solid #1e2f26;
+        transition: border-color 0.18s ease;
+    }
+
+    .nav-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+    }
+
+    .brand-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #f2f7f4;
+        font-family: 'Unbounded', system-ui, -apple-system, sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    .logo-symbol {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f2f7f4;
+    }
+
+    .logo-accent {
+        color: #a3f324;
+    }
+
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+    }
+
+    .nav-link {
+        color: #c2d1c8;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.18s ease;
+        position: relative;
+    }
+
+    .nav-link:hover {
+        color: #a3f324;
+    }
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .service-pill-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: rgba(163, 243, 36, 0.12);
+        border: 1px solid rgba(163, 243, 36, 0.35);
+        color: #a3f324;
+        padding: 6px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.18s ease;
+    }
+
+    .service-pill-btn:hover {
+        background-color: rgba(163, 243, 36, 0.22);
+        border-color: #a3f324;
+        box-shadow: 0 0 16px rgba(163, 243, 36, 0.22);
+        transform: translateY(-1px);
+    }
+
+    .pulse-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: #a3f324;
+        box-shadow: 0 0 8px #a3f324;
+        animation: pulse-anim 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-anim {
+
+        0%,
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.4;
+            transform: scale(0.85);
+        }
+    }
+
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 12px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        border: 1px solid transparent;
+    }
+
+    .btn-primary {
+        background-color: #a3f324;
+        color: #0b120c;
+        box-shadow: 0 2px 14px rgba(163, 243, 36, 0.22);
+    }
+
+    .btn-primary:hover {
+        background-color: #b4f742;
+        box-shadow: 0 4px 24px rgba(163, 243, 36, 0.35);
+        transform: translateY(-2px);
+    }
+
+    .btn-sm {
+        padding: 8px 16px;
+        font-size: 0.88rem;
+        border-radius: 6px;
+    }
+
+
+    .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px;
+    }
+
+    .mobile-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: #f2f7f4;
+        transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+        .nav-menu {
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            background-color: #111a15;
+            border-bottom: 1px solid #2a4135;
+            flex-direction: column;
+            padding: 24px;
+            gap: 20px;
+            transform: translateY(-120%);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-toggle {
+            display: flex;
+        }
+
+        .service-pill-btn {
+            display: none;
+        }
+    }
+</style>
+
+</html>
