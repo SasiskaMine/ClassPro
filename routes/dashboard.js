@@ -43,7 +43,7 @@ router.post('/settings', checkAuth, async (req, res) => {
     res.redirect('/dashboard');
 });
 
-router.post('/add-student', checkAuth, async (req, res) => {
+router.post('/add-student', checkAuth,role_check, async (req, res) => {
     const { fullName } = req.body;
     const currentClass = await readJson();
 
@@ -53,14 +53,12 @@ router.post('/add-student', checkAuth, async (req, res) => {
     res.redirect('/dashboard');
 });
 
-router.post('/del-student', checkAuth, async (req, res) => {
-    console.log('Что пришло с фронта:', req.body);
-
+router.post('/del-student', checkAuth,role_check, (req, res) => {
     const { id } = req.body;
-    const stmt = db.prepare('DELETE FROM students WHERE id = ?');
-    const info = stmt.run(Number(id));
+    const studentId = Number(id);
 
-    console.log('Результат удаления:', info);
+    db.prepare('DELETE FROM attendance WHERE student_id = ?').run(studentId);
+    db.prepare('DELETE FROM students WHERE id = ?').run(studentId);
 
     res.redirect('/dashboard');
 });

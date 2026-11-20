@@ -28,7 +28,7 @@
             <%= Class %> (<%= today %>)
         </h2>
     </header>
-    <md-tabs style="--md-sys-color-primary: rgb(86, 86, 86);">
+    <md-tabs style="--md-sys-color-primary: rgb(117, 117, 117);">
         <md-primary-tab>Главная</md-primary-tab>
         <md-primary-tab>Быстрое изменение</md-primary-tab>
         <md-primary-tab>Настройка</md-primary-tab>
@@ -48,10 +48,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Номер*</th>
-                        <th>ФИО*</th>
-                        <th>Комментарии</th>
-                        <th>Был*</th>
+                        <th>Номер</th>
+                        <th>ФИО</th>
+                        <% if (userRole==2) { %>
+                            <th>Действие</th>
+                            <% } %>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,8 +64,14 @@
                             <td>
                                 <%= student.full_name %>
                             </td>
-                            <td><input type="text" value="<%= student.comment || '' %>" disabled></td>
-                            <td><input type="checkbox" <%=student.is_present ? 'checked' : '' %> disabled></td>
+                            <% if (userRole==2) { %>
+                                <td>
+                                    <form action="/dashboard/del-student" method="post">
+                                        <input type="hidden" name="id" value="<%= student.id %>">
+                                        <button type="submit">Удалить</button>
+                                    </form>
+                                </td>
+                                <% } %>
                         </tr>
                         <% }) %>
                 </tbody>
@@ -130,7 +137,7 @@
                     <input type="text" name="id" placeholder="Номер" required>
                     <button type="submit">Удалить</button>
                 </form>
-                <% } %>
+                
 
                     <div>
                         <table>
@@ -154,6 +161,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <% } %>
+                    <form action="/">
+                        <h2>Аккаунт</h2>
+                        <button type="submit">Выйти</button>
+                    </form>
         </div>
     </div>
 </body>
@@ -173,9 +185,11 @@
 </script>
 <style>
     body {
-        background-color: antiquewhite;
+        background-color: #3f0866;
         height: 98dvh;
-        color: black;
+        color: white;
+        margin: 0;
+        padding: 0;
     }
 </style>
 

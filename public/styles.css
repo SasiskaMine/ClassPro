@@ -1,89 +1,100 @@
-
 :root {
-  --md-sys-color-primary: #db9900;
+  --md-sys-color-primary: #3f0866;
   --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #6FF7F6;
-  --md-sys-color-on-primary-container: #002020;
-  --md-filled-text-field-container-color: rgb(222, 222, 222);
-  --md-primary-tab-container-color: whitesmoke;
-  --md-primary-tab-label-text-font: rgb(121, 119, 119);
-
-
-
+  --md-sys-color-primary-container: #5c1491;
+  --md-sys-color-on-primary-container: #f0e1ff;
+  --md-sys-color-on-surface-variant: #d4aff5; /* Цвет неактивных элементов по умолчанию */
+  
+  --md-filled-text-field-container-color: #21162b;
+  
+  /* Настройки Material Web Tabs */
+  --md-primary-tab-container-color: #160e1d;
+  --md-primary-tab-label-text-color: #d4aff5; /* Цвет текста невыделенной вкладки */
+  --md-primary-tab-hover-label-text-color: #ffffff; /* При наведении */
+  --md-primary-tab-active-label-text-color: #ffffff; /* Выделенная вкладка */
+  --md-primary-tab-active-indicator-color: #a855f7; /* Полоска снизу у активной вкладки */
 }
 
 * {
     font-family: 'Courier New', Courier, monospace;
 }
-form {
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    color: black;
-    border-radius: 20px;
 
+body {
+    background-color: #0e0914;
+    color: #ede4f5;
+    margin: 0;
+}
+
+form {
+    border: 2px solid #591c87;
+    color: #ede4f5;
+    border-radius: 20px;
     margin: 15px;
-    
     width: 300px;
     max-height: 300px;
-    background-color: rgb(200, 200, 200);
+    background-color: #180f21;
     padding: 5px;
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap:5px;
+    gap: 5px;
 }
+
 button {
-    background-color: rgb(38, 131, 230);
-    border: 2px solid transparent;
+    background-color: #3f0866;
+    border: 2px solid #7522b0;
     border-radius: 5px;
-    color:white;
+    color: #ffffff;
     transition: background-color ease 0.3s, color ease 0.3s;
 }
+
 button:hover {
-    background-color: rgb(145, 198, 255);
-    color: black;
+    background-color: #6b1ca3;
+    color: #ffffff;
 }
+
 input {
-    background-color: rgb(3, 82, 166);
-    border: 2px solid transparent;
+    background-color: #241533;
+    border: 1px solid #591c87;
     border-radius: 5px;
-    color:white;
+    color: #ffffff;
 }
 
 #reg {
     display: none;
 }
+
 #login {
     display: none;
 }
 
 header {
     display: flex;
-    background: linear-gradient(to right, rgb(0, 173, 226),rgb(156, 213, 245));
+    background: linear-gradient(to right, #3f0866, #6d18ab);
     padding: 5px 15px;
-    color: whitesmoke;
-
+    color: #f4ebfc;
     justify-content: space-around;
-
 }
+
 .select-tabs {
-    background-color: gray;
+    background-color: #160c21;
     display: flex;
     justify-content: center;
     align-items: center; 
     gap: 15px; 
     padding: 10px 0;
+    border-bottom: 1px solid #351452;
 }
 
 .select-tabs a {
     text-decoration: none;
-    color: lightskyblue;
+    color: #d4aff5;
 }
-
 
 #vertical-hr {
     width: 2px;
     height: 15px; 
-    background-color: #cccccc;
+    background-color: #591c87;
     border: none;
     margin: 0; 
 }
@@ -91,21 +102,23 @@ header {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
+  background-color: #150d1c;
+  color: #ede4f5;
   font-family: sans-serif;
   margin-top: 20px;
 }
 
 thead {
-  background: linear-gradient(to right, rgb(0, 173, 226), rgb(156, 213, 245));
+  background: linear-gradient(to right, #3f0866, #6d18ab);
   color: #ffffff;
 }
 
 th, td {
   padding: 10px 14px;
   text-align: left;
-  border: 1px solid #cccccc;
+  border: 1px solid #36184f;
 }
+
 td input {
     width: 95%;
 }
@@ -115,22 +128,24 @@ th {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f4f8fb;
+  background-color: #1c1226;
 }
 
 tbody tr:hover {
-  background-color: #e6f4fa;
+  background-color: #2b193b;
 }
+
 #fast_edit {
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    border: 2px solid #591c87;
     border-radius: 5px;
     height: auto;
     width: auto;
     margin: 15px;
-    background-color: rgba(120, 120, 120, 0.3);
+    background-color: #180f21;
+    color: #ede4f5;
     padding: 5px;
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap:5px;
+    gap: 5px;
 }
