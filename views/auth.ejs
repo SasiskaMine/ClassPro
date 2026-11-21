@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ClassPro — Вход</title>
     <link rel="stylesheet" href="/styles.css">
     <script type="importmap">
     {
@@ -12,7 +12,7 @@
         "@material/web/": "https://esm.run/@material/web/"
       }
     }
-  </script>
+    </script>
     <script type="module">
         import '@material/web/all.js';
         import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
@@ -22,62 +22,145 @@
 </head>
 
 <body>
-    <h1>ClassPro</h1>
-    <form id="login" action="/login" method="post">
-        <h3>Вход</h3>
-        <md-filled-text-field type="text" id="userLogin" name="userLogin" placeholder="Логин"></md-filled-text-field>
-        <md-filled-text-field type="password" id="userPass" name="userPass" placeholder="Пароль"></md-filled-text-field>
-        <md-filled-button type="submit">Войти</md-filled-button>
-    </form>
-    <form id="reg" action="/register" method="post">
-        <h3>Регистрация</h3>
-        <md-filled-text-field type="text" name="userName" id="userName" placeholder="Имя"></md-filled-text-field>
-        <md-filled-text-field type="text" name="userLogin" id="userLogin" placeholder="Логин"></md-filled-text-field>
-        <md-filled-text-field type="password" name="userPass" id="userPass" placeholder="Пароль"></md-filled-text-field>
-        <md-filled-button type="submit">Зарегистрироваться</md-filled-button>
-    </form>
-    <p id="reg-show">Нету аккаунта? <a id="reg_show" href=""> Зарегестрируйтесь!</a></p>
-</body>
-<script>
-    const LoginForm = document.querySelector('#login');
-    const RegForm = document.querySelector('#reg');
-    const regShow = document.querySelector('#reg-show');
+    <main class="auth-wrapper">
+        <h1 class="auth-title">ClassPro</h1>
 
-    let isLogin = true;
+        <form id="login" class="auth-form" action="/login" method="post">
+            <h3>Вход</h3>
+            <md-filled-text-field type="text" id="loginUserLogin" name="userLogin" label="Логин" required></md-filled-text-field>
+            <md-filled-text-field type="password" id="loginUserPass" name="userPass" label="Пароль" required></md-filled-text-field>
+            <md-filled-button type="submit">Войти</md-filled-button>
+        </form>
 
-    LoginForm.style.display = 'flex';
-    RegForm.style.display = 'none';
+        <form id="reg" class="auth-form" action="/register" method="post">
+            <h3>Регистрация</h3>
+            <md-filled-text-field type="text" id="regUserName" name="userName" label="Имя" required></md-filled-text-field>
+            <md-filled-text-field type="text" id="regUserLogin" name="userLogin" label="Логин" required></md-filled-text-field>
+            <md-filled-text-field type="password" id="regUserPass" name="userPass" label="Пароль" required></md-filled-text-field>
+            <md-filled-button type="submit">Зарегистрироваться</md-filled-button>
+        </form>
 
-    regShow.addEventListener('click', (e) => {
-       
-        if (e.target.tagName === 'A') {
-            e.preventDefault();
+        <p id="reg-show">Нет аккаунта? <a href="#">Зарегистрируйтесь!</a></p>
+    </main>
 
-            if (isLogin) {
-                LoginForm.style.display = 'none';
-                RegForm.style.display = 'flex';
-                regShow.innerHTML = 'Уже есть аккаунт? <a id="reg_show" href="#">Войти!</a>';
-            } else {
-                RegForm.style.display = 'none';
-                LoginForm.style.display = 'flex';
-                regShow.innerHTML = 'Всё же нет аккаунта? <a id="reg_show" href="#">Зарегистрируйтесь!</a>';
+    <script>
+        const loginForm = document.querySelector('#login');
+        const regForm = document.querySelector('#reg');
+        const regShow = document.querySelector('#reg-show');
+
+        let isLogin = true;
+
+        loginForm.style.display = 'flex';
+        regForm.style.display = 'none';
+
+        regShow.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+
+                if (isLogin) {
+                    loginForm.style.display = 'none';
+                    regForm.style.display = 'flex';
+                    regShow.innerHTML = 'Уже есть аккаунт? <a href="#">Войти!</a>';
+                } else {
+                    regForm.style.display = 'none';
+                    loginForm.style.display = 'flex';
+                    regShow.innerHTML = 'Нет аккаунта? <a href="#">Зарегистрируйтесь!</a>';
+                }
+
+                isLogin = !isLogin;
+            }
+        });
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            padding: 16px;
+            background: radial-gradient(circle at top, #58118a, #1d0430 65%, #0e0914);
+            background-color: #180f21;
+            color: #f4ebfc;
+        }
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .auth-title {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        form.auth-form {
+            width: 100%;
+            max-width: 100%;
+            max-height: none;
+            margin: 0;
+            padding: 24px 20px;
+            border-radius: 20px;
+            background-color: rgba(24, 15, 33, 0.92);
+            border: 2px solid #591c87;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        form.auth-form h3 {
+            margin: 0 0 4px;
+            font-size: 1.35rem;
+            color: #f4ebfc;
+        }
+
+        form.auth-form md-filled-text-field,
+        form.auth-form md-filled-button {
+            width: 100%;
+        }
+
+        #reg-show {
+            margin: 4px 0 0;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #d4aff5;
+        }
+
+        #reg-show a {
+            color: #c084fc;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        #reg-show a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 12px;
             }
 
-            isLogin = !isLogin;
+            form.auth-form {
+                padding: 20px 14px;
+                border-radius: 16px;
+            }
         }
-    });
-</script>
-<style>
-    body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 98dvh;
-
-        background: linear-gradient(to bottom right, black, orange);
-        color: white;
-    }
-</style>
+    </style>
+</body>
 
 </html>

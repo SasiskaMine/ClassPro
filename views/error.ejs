@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ошибка</title>
+    <title>Ошибка <%= NumError %></title>
 </head>
 
 <body>
-    <div class="main-box">
+    <main class="main-box">
         <div class="main">
-            <span>
-                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#d46cca"
+            <span class="status-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#d46cca"
                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path
                         d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
@@ -20,110 +20,209 @@
                 </svg>
             </span>
             <h1>Ошибка <%= NumError %></h1>
-            <p id="info"><%= TextError%></p>
-            <a href="/"><button class="outline-button"><b>Вход</b></button></a>
+            <p id="info"><%= TextError %></p>
+            <a href="/" class="outline-button"><b>Вход</b></a>
         </div>
-        <img height="459px"
-            src="https://images01.nicepage.io/c461c07a441a5d220e8feb1a/c9d1903b449d53c5ad034708/a37107e3-f4c3-65c9-98a9-69b0f78a61c7.jpg"
-            alt="">
-    </div>
+
+        <div class="hero-image-wrapper">
+            <img class="hero-image"
+                src="https://images01.nicepage.io/c461c07a441a5d220e8feb1a/c9d1903b449d53c5ad034708/a37107e3-f4c3-65c9-98a9-69b0f78a61c7.jpg"
+                alt="Ошибка">
+        </div>
+    </main>
+
     <footer>
         <div class="footer-line">
-            KiwiProject 2026 |
-            <text-line>
+            <span>KiwiProject 2026</span>
+            <span class="footer-sep">|</span>
+            <span class="text-line">
                 <span id="yarndings-chart">KIRILL ANUROV</span>
                 <span>Кирилл Ануров</span>
-            </text-line>
-            | <a href="https://github.com/SasiskaMine/ClassPro">ClassPro</a>
+            </span>
+            <span class="footer-sep">|</span>
+            <a href="https://github.com/SasiskaMine/ClassPro">ClassPro</a>
         </div>
     </footer>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yarndings+20+Charted&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #58118a, #23043b 65%, #160226);
+            background-color: #3f0866;
+            color: #f4ebfc;
+            font-family: "Oswald", sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: underline wavy;
+            color: #d4aff5;
+            transition: color 0.18s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        .outline-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(52, 6, 86, 0.7);
+            border: 2px solid #9333ea;
+            border-radius: 14px;
+            min-width: 160px;
+            height: 42px;
+            padding: 0 24px;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: "Roboto", sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+        }
+
+        .outline-button:hover {
+            background-color: #7e22ce;
+            border-color: #c084fc;
+            box-shadow: 0 4px 18px rgba(147, 51, 234, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .main-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .main {
+            flex: 1;
+            max-width: 480px;
+        }
+
+        .main h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            margin: 12px 0;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+
+        #info {
+            font-family: "Roboto", sans-serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.5;
+            width: 100%;
+            max-width: 420px;
+            margin: 16px 0 28px;
+            color: #e4d4f4;
+            word-wrap: break-word;
+        }
+
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            max-width: 520px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-height: 460px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid #591c87;
+            box-shadow: 0 12px 32px rgba(10, 2, 18, 0.55);
+        }
+
+        footer {
+            background-color: rgba(14, 4, 24, 0.75);
+            border-top: 1px solid #3d125e;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-line {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            font-size: 16px;
+            color: #d4aff5;
+        }
+
+        .text-line {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            vertical-align: middle;
+        }
+
+        .text-line span {
+            font-size: 15px;
+            line-height: 1.15;
+        }
+
+        #yarndings-chart {
+            font-family: "Yarndings 20 Charted", system-ui;
+        }
+
+        @media (max-width: 900px) {
+            .main-box {
+                flex-direction: column;
+                text-align: center;
+                gap: 32px;
+                padding: 28px 20px;
+            }
+
+            .main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #info {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image-wrapper {
+                width: 100%;
+                max-width: 440px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .footer-sep {
+                display: none;
+            }
+
+            .footer-line {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
 </body>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yarndings+20+Charted&display=swap');
-
-    .outline-button {
-        background-color: rgba(52, 6, 86, 0.7);
-        border: 2px solid #730fbb;
-        border-radius: 15px;
-        width: 150px;
-        height: 35px;
-        color: white;
-        font-family: "Roboto", sans-serif;
-        transition: background-color ease 0.3s;
-    }
-    .outline-button:hover {
-        background-color: #730fbb;
-        border: 2px solid transparent;
-    }
-
-    a {
-        text-decoration: wavy;
-        color: #0f8ea7;
-    }
-
-    .footer-line {
-        padding: 16px 0;
-        font-size: 16px;
-        line-height: 34px;
-    }
-
-    text-line {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        vertical-align: middle;
-    }
-
-    text-line span {
-        font-size: 16px;
-        line-height: 16px;
-    }
-
-    #yarndings-chart {
-        font-family: "Yarndings 20 Charted", system-ui;
-    }
-
-
-    footer {
-        background-color: rgba(0, 0, 0, 0.5);
-        text-align: center;
-        width: 100%;
-    }
-
-    .main-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 15px 50px;
-        height: 100%;
-    }
-
-    body {
-        background-color: #3f0866;
-        color: white;
-        font-family: "Oswald", sans-serif;
-        height: 100vh;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-
-    }
-
-    h3 {
-        font-family: "Nubito", sans-serif;
-    }
-
-    #info {
-        font-family: "Roboto", sans-serif;
-        font-size: 20px;
-        width: 350px;
-    }
-
-    .main {
-        margin: 5px;
-
-    }
-</style>
 
 </html>

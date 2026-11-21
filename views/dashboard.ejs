@@ -12,7 +12,7 @@
         "@material/web/": "https://esm.run/@material/web/"
       }
     }
-  </script>
+    </script>
     <script type="module">
         import '@material/web/all.js';
         import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
@@ -22,73 +22,35 @@
 </head>
 
 <body>
-    <header>
-        <h2>ClassPro</h2>
-        <h2>
-            <%= Class %> (<%= today %>)
-        </h2>
+    <header class="dashboard-header">
+        <div class="header-inner">
+            <h2>ClassPro</h2>
+            <h2 class="class-badge">
+                <%= Class %> (<%= today %>)
+            </h2>
+        </div>
     </header>
-    <md-tabs style="--md-sys-color-primary: rgb(117, 117, 117);">
-        <md-primary-tab>Главная</md-primary-tab>
-        <md-primary-tab>Быстрое изменение</md-primary-tab>
-        <md-primary-tab>Настройка</md-primary-tab>
-    </md-tabs>
-    <!--  Не материал дизайн
-    <div class="select-tabs">
-        <a id="tab1s" href="">Главная</a>
-        <hr id="vertical-hr">
-        <a id="tab2s" href="">Быстрое изменение</a>
-        <hr id="vertical-hr">
-        <a id="tab3s" href="">Настройка</a>
-    </div>-->
 
-    <div class="tabs">
+    <div class="tabs-bar">
+        <md-tabs>
+            <md-primary-tab>Главная</md-primary-tab>
+            <md-primary-tab>Быстрое изменение</md-primary-tab>
+            <md-primary-tab>Настройка</md-primary-tab>
+        </md-tabs>
+    </div>
+
+    <main class="tabs container">
         <div id="tab1" style="display: block;">
             <h1>Добрый день, <%= Name %>!</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Номер</th>
-                        <th>ФИО</th>
-                        <% if (userRole==2) { %>
-                            <th>Действие</th>
-                            <% } %>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% students.forEach((student, index)=> { %>
-                        <tr>
-                            <td>
-                                <%= index + 1 %>
-                            </td>
-                            <td>
-                                <%= student.full_name %>
-                            </td>
-                            <% if (userRole==2) { %>
-                                <td>
-                                    <form action="/dashboard/del-student" method="post">
-                                        <input type="hidden" name="id" value="<%= student.id %>">
-                                        <button type="submit">Удалить</button>
-                                    </form>
-                                </td>
-                                <% } %>
-                        </tr>
-                        <% }) %>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="tab2" style="display: none;">
-            <h1>Отметка за <%= today %>
-            </h1>
-            <form id="fast_edit" action="/dashboard/save-journal" method="post">
+            <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
-                            <th>Номер*</th>
-                            <th>ФИО*</th>
-                            <th>Комментарии</th>
-                            <th>Был*</th>
+                            <th class="col-num">Номер</th>
+                            <th>ФИО</th>
+                            <% if (userRole==2) { %>
+                                <th class="col-action">Действие</th>
+                            <% } %>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,101 +58,400 @@
                             <tr>
                                 <td>
                                     <%= index + 1 %>
-                                        <input type="hidden" name="studentIds" value="<%= student.id %>">
                                 </td>
                                 <td>
                                     <%= student.full_name %>
                                 </td>
-                                <td>
-                                    <input type="text" name="comments" value="<%= student.comment || '' %>"
-                                        placeholder="Заметка...">
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="present" value="<%= student.id %>"
-                                        <%=student.is_present ? 'checked' : '' %>>
-                                </td>
+                                <% if (userRole==2) { %>
+                                    <td>
+                                        <form class="table-action-form" action="/dashboard/del-student" method="post">
+                                            <input type="hidden" name="id" value="<%= student.id %>">
+                                            <button type="submit" class="btn-danger">Удалить</button>
+                                        </form>
+                                    </td>
+                                <% } %>
                             </tr>
-                            <% }) %>
+                        <% }) %>
                     </tbody>
                 </table>
-                <br>
-                <button type="submit">Сохранить журнал</button>
+            </div>
+        </div>
+
+        <div id="tab2" style="display: none;">
+            <h1>Отметка за <%= today %></h1>
+            <form id="fast_edit" action="/dashboard/save-journal" method="post">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-num">№</th>
+                                <th>ФИО*</th>
+                                <th>Комментарии</th>
+                                <th class="col-check">Был*</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach((student, index)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= index + 1 %>
+                                        <input type="hidden" name="studentIds" value="<%= student.id %>">
+                                    </td>
+                                    <td class="student-name-cell">
+                                        <%= student.full_name %>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="comment-input" name="comments" value="<%= student.comment || '' %>"
+                                            placeholder="Заметка...">
+                                    </td>
+                                    <td class="check-cell">
+                                        <input type="checkbox" class="present-checkbox" name="present" value="<%= student.id %>"
+                                            <%=student.is_present ? 'checked' : '' %>>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn-save">Сохранить журнал</button>
+                </div>
             </form>
         </div>
 
         <div id="tab3" style="display: none;">
             <h1>Настройки:</h1>
-            <% if (userRole===2) { %>
-                <form action="/dashboard/settings" method="post">
-                    <input type="text" name="SettingsClassNum" placeholder="Номер и буква класса" value="<%= Class %>">
-                    <button type="submit">Применить</button>
-                </form>
+            <div class="settings-layout">
+                <div class="settings-cards">
+                    <% if (userRole===2) { %>
+                        <form class="settings-card" action="/dashboard/settings" method="post">
+                            <h3>Класс</h3>
+                            <input type="text" name="SettingsClassNum" placeholder="Номер и буква класса" value="<%= Class %>">
+                            <button type="submit">Применить</button>
+                        </form>
 
-                <h2>Добавить ученика в <%= Class %> класс:</h2>
-                <form action="/dashboard/add-student" method="post">
-                    <input type="text" name="fullName" placeholder="Иванов Иван Иванович" required>
-                    <button type="submit">Добавить</button>
-                </form>
+                        <form class="settings-card" action="/dashboard/add-student" method="post">
+                            <h3>Добавить ученика (<%= Class %>)</h3>
+                            <input type="text" name="fullName" placeholder="Иванов Иван Иванович" required>
+                            <button type="submit">Добавить</button>
+                        </form>
 
-                <h2>Удалить ученика из <%= Class %> класса:</h2>
-                <form action="/dashboard/del-student" method="post">
-                    <input type="text" name="id" placeholder="Номер" required>
-                    <button type="submit">Удалить</button>
-                </form>
-                
-
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Номер*</th>
-                                    <th>ФИО*</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% students.forEach((student, index)=> { %>
-                                    <tr>
-                                        <td>
-                                            <%= index + 1 %>
-                                        </td>
-                                        <td>
-                                            <%= student.full_name %>
-                                        </td>
-                                    </tr>
-                                    <% }) %>
-                            </tbody>
-                        </table>
-                    </div>
+                        <form class="settings-card" action="/dashboard/del-student" method="post">
+                            <h3>Удалить ученика (<%= Class %>)</h3>
+                            <input type="text" name="id" placeholder="Номер" required>
+                            <button type="submit" class="btn-danger">Удалить</button>
+                        </form>
                     <% } %>
-                    <form action="/">
-                        <h2>Аккаунт</h2>
+
+                    <form class="settings-card" action="/">
+                        <h3>Аккаунт</h3>
                         <button type="submit">Выйти</button>
                     </form>
+                </div>
+
+                <% if (userRole===2) { %>
+                    <div class="settings-list">
+                        <h3>Список учеников для сверки номеров</h3>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="col-num">Номер*</th>
+                                        <th>ФИО*</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% students.forEach((student, index)=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= index + 1 %>
+                                            </td>
+                                            <td>
+                                                <%= student.full_name %>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <script>
+        const tabs = document.querySelector('md-tabs');
+        const tab1 = document.querySelector('#tab1');
+        const tab2 = document.querySelector('#tab2');
+        const tab3 = document.querySelector('#tab3');
+
+        tabs.addEventListener('change', (event) => {
+            const index = event.target.activeTabIndex;
+
+            tab1.style.display = index === 0 ? 'block' : 'none';
+            tab2.style.display = index === 1 ? 'block' : 'none';
+            tab3.style.display = index === 2 ? 'block' : 'none';
+        });
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #58118a, #23043b 65%, #160226);
+            background-color: #3f0866;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: #f4ebfc;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .dashboard-header {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(to right, #3f0866, #6d18ab);
+            border-bottom: 1px solid #7522b0;
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dashboard-header h2 {
+            margin: 0;
+            font-size: clamp(1.15rem, 3vw, 1.5rem);
+        }
+
+        .class-badge {
+            background-color: rgba(20, 7, 33, 0.55);
+            padding: 6px 14px;
+            border-radius: 10px;
+            border: 1px solid #8c42c7;
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem) !important;
+        }
+
+        .tabs-bar {
+            width: 100%;
+            background-color: #160e1d;
+            border-bottom: 1px solid #48186e;
+        }
+
+        md-tabs {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+        }
+
+        h1 {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            margin: 0 0 18px;
+        }
+
+        h3 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: #e9d5ff;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 12px;
+            border: 1px solid #591c87;
+            background-color: #150d1c;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 0;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            border-color: #36184f;
+        }
+
+        .col-num {
+            width: 60px;
+            text-align: center;
+        }
+
+        .col-action {
+            width: 120px;
+            text-align: center;
+        }
+
+        .col-check {
+            width: 70px;
+            text-align: center;
+        }
+
+        .check-cell {
+            text-align: center;
+        }
+
+        .student-name-cell {
+            min-width: 160px;
+        }
+
+        .comment-input {
+            width: 100%;
+            min-width: 140px;
+            padding: 8px 10px;
+            font-size: 0.95rem;
+        }
+
+        .present-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: #9333ea;
+            cursor: pointer;
+        }
+
+        /* Сброс глобального стиля form для кнопки удаления внутри таблицы */
+        form.table-action-form {
+            width: auto;
+            max-height: none;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            padding: 9px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .btn-danger {
+            background-color: #6b1138;
+            border-color: #b82564;
+        }
+
+        .btn-danger:hover {
+            background-color: #991b52;
+            color: #ffffff;
+        }
+
+        #fast_edit {
+            width: 100%;
+            max-width: 100%;
+            max-height: none;
+            margin: 0;
+            padding: 14px;
+            border-radius: 14px;
+            background-color: rgba(24, 15, 33, 0.85);
+            border: 2px solid #591c87;
+            gap: 14px;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-save {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .settings-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        form.settings-card {
+            width: 100%;
+            max-width: 100%;
+            max-height: none;
+            margin: 0;
+            padding: 18px;
+            border-radius: 16px;
+            background-color: rgba(24, 15, 33, 0.9);
+            border: 2px solid #591c87;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        form.settings-card input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+        }
+
+        form.settings-card button {
+            width: 100%;
+            padding: 10px;
+        }
+
+        @media (max-width: 850px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-header {
+                padding: 10px 14px;
+            }
+
+            .container {
+                padding: 16px 10px 32px;
+            }
+
+            th, td {
+                padding: 9px 10px;
+                font-size: 0.9rem;
+            }
+
+            #fast_edit {
+                padding: 10px;
+            }
+
+            .form-footer {
+                justify-content: stretch;
+            }
+
+            .btn-save {
+                width: 100%;
+            }
+        }
+    </style>
 </body>
-<script>
-    const tabs = document.querySelector('md-tabs');
-    const tab1 = document.querySelector('#tab1');
-    const tab2 = document.querySelector('#tab2');
-    const tab3 = document.querySelector('#tab3');
-
-    tabs.addEventListener('change', (event) => {
-        const index = event.target.activeTabIndex;
-
-        tab1.style.display = index === 0 ? 'block' : 'none';
-        tab2.style.display = index === 1 ? 'block' : 'none';
-        tab3.style.display = index === 2 ? 'block' : 'none';
-    });
-</script>
-<style>
-    body {
-        background-color: #3f0866;
-        height: 98dvh;
-        color: white;
-        margin: 0;
-        padding: 0;
-    }
-</style>
 
 </html>

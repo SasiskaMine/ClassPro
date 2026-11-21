@@ -19,10 +19,14 @@
 
             <nav class="nav-menu" id="navMenu">
                 <a href="mailto:kirillanurov2023@gmail.com" class="nav-link">Контакты</a>
+                <a href="https://ai.kiwiproject.ru" target="_blank" rel="noopener noreferrer" class="service-pill-btn mobile-only-pill">
+                    <span class="pulse-dot"></span>
+                    <span>ai.kiwiproject.ru</span>
+                </a>
             </nav>
 
             <div class="nav-actions">
-                <a href="https://ai.kiwiproject.ru" target="_blank" rel="noopener noreferrer" class="service-pill-btn">
+                <a href="https://ai.kiwiproject.ru" target="_blank" rel="noopener noreferrer" class="service-pill-btn desktop-pill">
                     <span class="pulse-dot"></span>
                     <span>ai.kiwiproject.ru</span>
                 </a>
@@ -35,10 +39,11 @@
             </div>
         </div>
     </header>
-    <div class="main-box">
+
+    <main class="main-box">
         <div class="main">
-            <span>
-                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#d46cca"
+            <span class="status-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#d46cca"
                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path
                         d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
@@ -46,37 +51,42 @@
                     <line x1="12" y1="17" x2="12.01" y2="17" />
                 </svg>
             </span>
-            <h1>В разработке</h2>
-                <p id="info">Сервис совсем скоро будет доступен! Мы готовим для вас удивительное и захватывающее.</p>
-                <div>
-                    <h3>Осталось ожидать:</h4>
-                        <p id="timer">
-                            <%= WaitDate %>
-                        </p>
-                </div>
+            <h1>В разработке</h1>
+            <p id="info">Сервис совсем скоро будет доступен! Мы готовим для вас удивительное и захватывающее.</p>
+            <div class="timer-block">
+                <h3>Осталось ожидать:</h3>
+                <p id="timer">
+                    <%= WaitDate %>
+                </p>
+            </div>
         </div>
-        <img height="459px"
-            src="https://images01.nicepage.io/c461c07a441a5d220e8feb1a/c9d1903b449d53c5ad034708/a37107e3-f4c3-65c9-98a9-69b0f78a61c7.jpg"
-            alt="">
-    </div>
+
+        <div class="hero-image-wrapper">
+            <img class="hero-image"
+                src="https://images01.nicepage.io/c461c07a441a5d220e8feb1a/c9d1903b449d53c5ad034708/a37107e3-f4c3-65c9-98a9-69b0f78a61c7.jpg"
+                alt="Иллюстрация разработки">
+        </div>
+    </main>
+
     <footer>
         <div class="footer-line">
-            KiwiProject 2026 |
-            <text-line>
+            <span>KiwiProject 2026</span>
+            <span class="footer-sep">|</span>
+            <span class="text-line">
                 <span id="yarndings-chart">KIRILL ANUROV</span>
                 <span>Кирилл Ануров</span>
-            </text-line>
-            | <a href="https://github.com/SasiskaMine/ClassPro">ClassPro</a>
+            </span>
+            <span class="footer-sep">|</span>
+            <a href="https://github.com/SasiskaMine/ClassPro">ClassPro</a>
         </div>
     </footer>
-
-
 
     <script>
         const target = new Date('<%= targetDate %>');
         const el = document.getElementById('timer');
 
         const tick = () => {
+            if (isNaN(target.getTime())) return;
             const diff = target - Date.now();
             if (diff <= 0) return (el.textContent = 'Время вышло!');
 
@@ -90,305 +100,406 @@
         };
 
         setTimeout(tick, 1000 - (Date.now() % 1000));
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('open');
+            });
+        }
     </script>
-</body>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yarndings+20+Charted&display=swap');
 
-    .outline-button {
-        background-color: rgba(52, 6, 86, 0.7);
-        border: 2px solid #730fbb;
-        border-radius: 15px;
-        width: 150px;
-        height: 35px;
-        color: white;
-        font-family: "Roboto", sans-serif;
-        transition: background-color ease 0.3s;
-    }
-    .outline-button:hover {
-        background-color: #730fbb;
-        border: 2px solid transparent;
-    }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yarndings+20+Charted&display=swap');
 
-    a {
-        text-decoration:wavy;
-        color:#0f8ea7;
-    }
-
-    .footer-line {
-        padding: 16px 0;
-        font-size: 16px;
-        line-height: 34px;
-    }
-
-    text-line {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        vertical-align: middle;
-    }
-
-    text-line span {
-        font-size: 16px;
-        line-height: 16px;
-    }
-
-    #yarndings-chart {
-        font-family: "Yarndings 20 Charted", system-ui;
-    }
-
-
-    footer {
-        background-color: rgba(0, 0, 0, 0.5);
-        text-align: center;
-        width: 100%;
-    }
-
-    .main-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 15px 50px;
-        height: 100%;
-    }
-
-    body {
-        background-color: #3f0866;
-        color: white;
-        font-family: "Oswald", sans-serif;
-        height: 100vh;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-
-    }
-
-    h3 {
-        font-family: "Nubito", sans-serif;
-    }
-
-    #info {
-        font-family: "Roboto", sans-serif;
-        font-size: 20px;
-        width: 350px;
-    }
-
-    .main {
-        margin: 5px;
-
-    }
-
-
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 24px;
-        padding-right: 24px;
-        position: relative;
-        z-index: 1;
-    }
-
-
-    .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        background-color: rgba(9, 14, 12, 0.52);
-        border-bottom: 1px solid #1e2f26;
-        transition: border-color 0.18s ease;
-    }
-
-    .nav-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 72px;
-    }
-
-    .brand-logo {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: #f2f7f4;
-        font-family: 'Unbounded', system-ui, -apple-system, sans-serif;
-        font-size: 1.25rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-    }
-
-    .logo-symbol {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #f2f7f4;
-    }
-
-    .logo-accent {
-        color: #a3f324;
-    }
-
-    .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 32px;
-    }
-
-    .nav-link {
-        color: #c2d1c8;
-        text-decoration: none;
-        font-size: 0.95rem;
-        font-weight: 500;
-        transition: color 0.18s ease;
-        position: relative;
-    }
-
-    .nav-link:hover {
-        color: #a3f324;
-    }
-
-    .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    .service-pill-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background-color: rgba(163, 243, 36, 0.12);
-        border: 1px solid rgba(163, 243, 36, 0.35);
-        color: #a3f324;
-        padding: 6px 14px;
-        border-radius: 999px;
-        text-decoration: none;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
-        font-weight: 600;
-        transition: all 0.18s ease;
-    }
-
-    .service-pill-btn:hover {
-        background-color: rgba(163, 243, 36, 0.22);
-        border-color: #a3f324;
-        box-shadow: 0 0 16px rgba(163, 243, 36, 0.22);
-        transform: translateY(-1px);
-    }
-
-    .pulse-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background-color: #a3f324;
-        box-shadow: 0 0 8px #a3f324;
-        animation: pulse-anim 2s infinite ease-in-out;
-    }
-
-    @keyframes pulse-anim {
-
-        0%,
-        100% {
-            opacity: 1;
-            transform: scale(1);
+        * {
+            box-sizing: border-box;
         }
 
-        50% {
-            opacity: 0.4;
-            transform: scale(0.85);
-        }
-    }
-
-
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        font-size: 0.95rem;
-        font-weight: 600;
-        padding: 12px 24px;
-        border-radius: 12px;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.18s ease;
-        border: 1px solid transparent;
-    }
-
-    .btn-primary {
-        background-color: #a3f324;
-        color: #0b120c;
-        box-shadow: 0 2px 14px rgba(163, 243, 36, 0.22);
-    }
-
-    .btn-primary:hover {
-        background-color: #b4f742;
-        box-shadow: 0 4px 24px rgba(163, 243, 36, 0.35);
-        transform: translateY(-2px);
-    }
-
-    .btn-sm {
-        padding: 8px 16px;
-        font-size: 0.88rem;
-        border-radius: 6px;
-    }
-
-
-    .mobile-toggle {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        flex-direction: column;
-        gap: 5px;
-        padding: 8px;
-    }
-
-    .mobile-toggle span {
-        display: block;
-        width: 22px;
-        height: 2px;
-        background-color: #f2f7f4;
-        transition: 0.3s;
-    }
-
-    @media (max-width: 768px) {
-        .nav-menu {
-            position: fixed;
-            top: 72px;
-            left: 0;
-            right: 0;
-            background-color: #111a15;
-            border-bottom: 1px solid #2a4135;
-            flex-direction: column;
-            padding: 24px;
-            gap: 20px;
-            transform: translateY(-120%);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .nav-menu.open {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .mobile-toggle {
+        body {
+            background-color: #3f0866;
+            color: white;
+            font-family: "Oswald", sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            padding: 0;
             display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: underline wavy;
+            color: #0f8ea7;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 24px;
+            padding-right: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            background-color: rgba(9, 14, 12, 0.52);
+            border-bottom: 1px solid #1e2f26;
+            transition: border-color 0.18s ease;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #f2f7f4;
+            font-family: 'Unbounded', system-ui, -apple-system, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-symbol {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f2f7f4;
+        }
+
+        .logo-accent {
+            color: #a3f324;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            color: #c2d1c8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.18s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #a3f324;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
         .service-pill-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(163, 243, 36, 0.12);
+            border: 1px solid rgba(163, 243, 36, 0.35);
+            color: #a3f324;
+            padding: 6px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.18s ease;
+        }
+
+        .service-pill-btn:hover {
+            background-color: rgba(163, 243, 36, 0.22);
+            border-color: #a3f324;
+            box-shadow: 0 0 16px rgba(163, 243, 36, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .mobile-only-pill {
             display: none;
         }
-    }
-</style>
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #a3f324;
+            box-shadow: 0 0 8px #a3f324;
+            animation: pulse-anim 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-anim {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.85);
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: #a3f324;
+            color: #0b120c;
+            box-shadow: 0 2px 14px rgba(163, 243, 36, 0.22);
+        }
+
+        .btn-primary:hover {
+            background-color: #b4f742;
+            box-shadow: 0 4px 24px rgba(163, 243, 36, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.88rem;
+            border-radius: 6px;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: #f2f7f4;
+            transition: 0.3s;
+        }
+
+        .main-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .main {
+            flex: 1;
+            max-width: 480px;
+        }
+
+        .main h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin: 12px 0;
+            line-height: 1.1;
+        }
+
+        #info {
+            font-family: "Roboto", sans-serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.5;
+            width: 100%;
+            max-width: 420px;
+            margin: 16px 0 24px;
+            color: #ede4f5;
+        }
+
+        .timer-block h3 {
+            font-family: "Nunito", sans-serif;
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+            color: #d4aff5;
+        }
+
+        #timer {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.04em;
+            color: #a3f324;
+        }
+
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            max-width: 520px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-height: 460px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-line {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            font-size: 16px;
+        }
+
+        .text-line {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            vertical-align: middle;
+        }
+
+        .text-line span {
+            font-size: 15px;
+            line-height: 1.15;
+        }
+
+        #yarndings-chart {
+            font-family: "Yarndings 20 Charted", system-ui;
+        }
+
+        @media (max-width: 900px) {
+            .main-box {
+                flex-direction: column;
+                text-align: center;
+                gap: 32px;
+                padding: 28px 20px;
+            }
+
+            .main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #info {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image-wrapper {
+                width: 100%;
+                max-width: 440px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background-color: #160924;
+                border-bottom: 1px solid #591c87;
+                flex-direction: column;
+                padding: 24px;
+                gap: 20px;
+                transform: translateY(-130%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .desktop-pill {
+                display: none;
+            }
+
+            .mobile-only-pill {
+                display: inline-flex;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .brand-logo {
+                font-size: 1.05rem;
+            }
+
+            .btn-sm {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .nav-actions {
+                gap: 8px;
+            }
+
+            .footer-sep {
+                display: none;
+            }
+
+            .footer-line {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
+</body>
 
 </html>
